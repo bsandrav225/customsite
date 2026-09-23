@@ -1,0 +1,91 @@
+# ============================================================
+# CRAFTD — корневой .htaccess
+# Защита файлов, каталогов и HTTP-заголовки безопасности
+# ============================================================
+
+Options -Indexes -MultiViews
+
+DirectoryIndex index.php index.html
+
+# --- Запрет прямого доступа к служебным файлам ---
+<FilesMatch "^(config\.local\.php|config\.php|\.env|\.gitignore|composer\.(json|lock))$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Запрет скачивания резервных и служебных расширений
+<FilesMatch "\.(sql|bak|log|ini|env|md|yml|yaml|dist|example)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# --- Закрытие служебных каталогов от прямого HTTP-доступа ---
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteRule ^(?:data|includes|storage)(?:/|$) - [F,L]
+
+  # Блокировка скрытых файлов (.git, .env и т.д.)
+  RewriteRule (^|/)\. - [F,L]
+</IfModule>
+
+# --- Заголовки безопасности ---
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set X-Permitted-Cross-Domain-Policies "none"
+  Header always unset X-Powered-By
+  Header always unset Server
+
+  # HSTS включается только при HTTPS
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+
+  # Запрет кэширования для PHP-страниц с персональными данными
+  <FilesMatch "\.(php)$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+  </FilesMatch>
+</IfModule>
+
+# --- Ограничение методов (только GET/POST/HEAD) ---
+<IfModule mod_rewrite.c>
+  RewriteCond %{REQUEST_METHOD} !^(GET|POST|HEAD)$
+  RewriteRule ^ - [F,L]
+</IfModule>
+
+# --- Ограничение размера тела запроса (10 МБ) ---
+<IfModule mod_php.c>
+  php_value post_max_size 10M
+  php_value upload_max_filesize 6M
+  php_flag display_errors Off
+  php_flag log_errors On
+  php_flag expose_php Off
+</IfModule>
+
+<IfModule mod_php8.c>
+  php_value post_max_size 10M
+  php_value upload_max_filesize 6M
+  php_flag display_errors Off
+  php_flag log_errors On
+  php_flag expose_php Off
+</IfModule>
+
+# --- Защита от hotlinking изображений (опционально, свой домен разрешён) ---
+<IfModule mod_rewrite.c>
+  RewriteCond %{HTTP_REFERER} !^$
+  RewriteCond %{HTTP_REFERER} !^https?://(localhost|127\.0\.0\.1)(:\d+)?/ [NC]
+  RewriteCond %{HTTP_REFERER} !^https?://%{HTTP_HOST}/ [NC]
+  RewriteRule \.(jpe?g|png|gif|webp)$ - [F,NC,L]
+</IfModule>
