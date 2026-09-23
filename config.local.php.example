@@ -1,0 +1,29 @@
+<?php
+/**
+ * Локальные / серверные настройки БД.
+ *
+ * 1. Скопируйте этот файл как config.local.php
+ * 2. Заполните значения под вашу среду
+ * 3. Файл config.local.php НЕ коммитится в Git (.gitignore)
+ *
+ * XAMPP (типичные значения):
+ *   DB_HOST = 127.0.0.1
+ *   DB_NAME = castomize
+ *   DB_USER = root
+ *   DB_PASS = ''
+ *
+ * Хостинг:
+ *   укажите данные из панели хостинга (имя БД, пользователь, пароль).
+ *   Обычно DB_HOST = localhost
+ */
+declare(strict_types=1);
+
+define('DB_HOST', '127.0.0.1');
+define('DB_NAME', 'castomize');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+
+// При необходимости переопределите публичные константы сайта:
+// define('SITE_EMAIL', 'you@example.com');
+// define('SOCIAL_TELEGRAM', 'https://t.me/username');
+// define('SOCIAL_VK', 'https://vk.ru/username');
