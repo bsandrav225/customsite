@@ -1,0 +1,35 @@
+# Локальные секреты и окружение
+config.local.php
+.env
+.env.*
+
+# Служебные / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Заметки и черновики
+Доработки.txt
+*.bak
+*.log
+*.tmp
+
+# Дампы с данными (в репозитории только database/schema.sql)
+castomize.sql
+castomize (1).sql
+*.sql.gz
+
+# Загрузки пользователей
+uploads/requests/*
+!uploads/requests/.htaccess
+!uploads/requests/.gitkeep
+!uploads/.htaccess
+
+# Runtime rate-limit
+storage/rate_limit/*
+!storage/rate_limit/.gitkeep
+!storage/.htaccess
