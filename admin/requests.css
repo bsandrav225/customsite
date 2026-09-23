@@ -1,0 +1,223 @@
+/* ============================================================
+   CRAFTD — requests.css
+   Страница списка и деталей заявок.
+   ============================================================ */
+
+.admin-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 48px 80px;
+}
+
+.admin-hero {
+  margin-bottom: 36px;
+}
+
+.admin-meta {
+  margin-top: 12px;
+  font-family: var(--font-accent);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--text-mid);
+}
+
+.admin-meta strong {
+  color: var(--green-deep);
+  font-weight: 400;
+}
+
+.admin-flash {
+  margin-bottom: 24px;
+}
+
+.admin-panel {
+  background: #fff;
+  border: 1px solid rgba(45, 106, 79, 0.12);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 12px 40px rgba(26, 58, 42, 0.06);
+}
+
+.admin-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(45, 106, 79, 0.1);
+}
+
+.admin-panel-title {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--green-deep);
+}
+
+.admin-empty {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text-mid);
+  font-size: 1.15rem;
+}
+
+/* ── Таблица ───────────────────────────────────────────────── */
+.requests-table-wrap {
+  overflow-x: auto;
+}
+
+.requests-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.05rem;
+}
+
+.requests-table th {
+  font-family: var(--font-accent);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(45, 106, 79, 0.15);
+  white-space: nowrap;
+}
+
+.requests-table td {
+  padding: 16px 14px;
+  border-bottom: 1px solid rgba(45, 106, 79, 0.08);
+  color: var(--text-dark);
+  vertical-align: middle;
+}
+
+.requests-table tbody tr {
+  transition: background 0.2s;
+}
+
+.requests-table tbody tr:hover {
+  background: rgba(216, 243, 220, 0.35);
+}
+
+.requests-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.request-id {
+  font-family: var(--font-accent);
+  color: var(--purple-mid);
+  letter-spacing: 0.04em;
+}
+
+.request-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.request-actions form {
+  display: inline;
+}
+
+.link-detail {
+  font-family: var(--font-accent);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--green-deep);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 1.5px solid var(--green-mid);
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+
+.link-detail:hover {
+  background: var(--purple-pale);
+  border-color: var(--purple-mid);
+  color: var(--purple-deep);
+}
+
+/* ── Детали заявки ─────────────────────────────────────────── */
+.request-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 40px;
+}
+
+.request-detail dt {
+  font-family: var(--font-accent);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  padding-top: 16px;
+}
+
+.request-detail dd {
+  font-size: 1.15rem;
+  color: var(--text-dark);
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(45, 106, 79, 0.08);
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.request-detail a {
+  color: var(--purple-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.request-detail a:hover {
+  color: var(--purple-deep);
+}
+
+.request-details-list,
+.request-files {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+.request-details-list li {
+  word-break: break-word;
+}
+
+.request-detail-actions {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(45, 106, 79, 0.1);
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .admin-main {
+    padding: 32px 20px 60px;
+  }
+
+  .admin-panel {
+    padding: 22px 18px;
+  }
+
+  .admin-panel-header {
+    flex-direction: column;
+  }
+
+  .request-detail {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .request-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

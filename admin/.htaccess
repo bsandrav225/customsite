@@ -1,0 +1,9 @@
+# Дополнительная защита админ-панели
+Options -Indexes
+DirectoryIndex login.php index.php
+
+<IfModule mod_headers.c>
+  Header set X-Frame-Options "DENY"
+  Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  Header set Pragma "no-cache"
+</IfModule>

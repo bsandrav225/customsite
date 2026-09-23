@@ -1,0 +1,354 @@
+/* ============================================================
+   CRAFTD — admin.css
+   Общие стили панели администратора.
+   Визуальный язык совпадает с главной страницей и конструктором.
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: ForumRegular;
+  src: url(../fonts/Forum-Regular.ttf);
+}
+@font-face {
+  font-family: Comfortaa;
+  src: url(../fonts/Comfortaa-Regular.ttf);
+  font-weight: 400;
+}
+@font-face {
+  font-family: Comfortaa;
+  src: url(../fonts/Comfortaa-Medium.ttf);
+  font-weight: 500;
+}
+@font-face {
+  font-family: BadScript;
+  src: url(../fonts/BadScript-Regular.ttf);
+  font-style: italic;
+}
+
+:root {
+  --font-heading: ForumRegular, Georgia, serif;
+  --font-body: Comfortaa, system-ui, sans-serif;
+  --font-accent: ForumRegular, Georgia, serif;
+  --font-italic: BadScript, cursive;
+
+  --green-deep:   #1a3a2a;
+  --green-mid:    #2d6a4f;
+  --green-bright: #52b788;
+  --green-light:  #95d5b2;
+  --green-pale:   #d8f3dc;
+
+  --white: #f8fff9;
+
+  --purple-deep:   #2d1b69;
+  --purple-mid:    #6b3fa0;
+  --purple-bright: #9b59b6;
+  --purple-pale:   #e8d5f5;
+
+  --text-dark: #0d2018;
+  --text-mid:  #2d6a4f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body.admin-body {
+  font-family: var(--font-body);
+  background: var(--white);
+  color: var(--text-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Навигация ─────────────────────────────────────────────── */
+.admin-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 48px;
+  background: rgba(248, 255, 249, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(45, 106, 79, 0.12);
+}
+
+.admin-nav .logo {
+  font-family: var(--font-accent);
+  font-size: 1.35rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  color: var(--green-deep);
+  flex-shrink: 0;
+}
+
+.admin-nav .logo span {
+  color: var(--purple-mid);
+}
+
+.admin-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+
+.admin-nav-links a {
+  font-family: var(--font-accent);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  color: var(--green-deep);
+  padding: 10px 18px;
+  border-radius: 100px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.admin-nav-links a:hover {
+  color: var(--purple-mid);
+  background: rgba(232, 213, 245, 0.45);
+}
+
+.admin-nav-links .nav-cta {
+  background: var(--green-deep);
+  color: var(--white) !important;
+}
+
+.admin-nav-links .nav-cta:hover {
+  background: var(--purple-deep) !important;
+  color: var(--white) !important;
+}
+
+/* ── Общая типографика ─────────────────────────────────────── */
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--purple-mid);
+  margin-bottom: 16px;
+}
+
+.section-tag::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1.5px;
+  background: var(--purple-mid);
+}
+
+.admin-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 400;
+  color: var(--green-deep);
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.admin-title em {
+  color: var(--purple-mid);
+  font-family: var(--font-italic), var(--font-body);
+  font-style: italic;
+}
+
+.admin-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-mid);
+}
+
+/* ── Кнопки ────────────────────────────────────────────────── */
+.btn-primary {
+  background: var(--green-deep);
+  color: var(--white);
+  border: none;
+  padding: 14px 32px;
+  border-radius: 100px;
+  font-family: var(--font-accent);
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--purple-deep);
+  transform: translateX(-100%);
+  transition: transform 0.35s ease;
+}
+
+.btn-primary span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-primary:hover::before {
+  transform: translateX(0);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(45, 27, 105, 0.3);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1.5px solid var(--green-mid);
+  color: var(--green-mid);
+  padding: 12px 24px;
+  border-radius: 100px;
+  font-family: var(--font-accent);
+  font-size: 0.85rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.25s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-ghost:hover {
+  background: var(--purple-pale);
+  border-color: var(--purple-mid);
+  color: var(--purple-deep);
+}
+
+.btn-danger {
+  background: transparent;
+  border: 1.5px solid rgba(155, 89, 182, 0.55);
+  color: var(--purple-mid);
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-family: var(--font-accent);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.btn-danger:hover {
+  background: var(--purple-deep);
+  border-color: var(--purple-deep);
+  color: var(--white);
+}
+
+/* ── Формы ─────────────────────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-family: var(--font-accent);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(149, 213, 178, 0.85);
+}
+
+.form-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.form-input:focus {
+  border-color: var(--green-bright);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ── Алерты ────────────────────────────────────────────────── */
+.form-alert {
+  margin-top: 16px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.form-alert-success {
+  background: rgba(82, 183, 136, 0.14);
+  border: 1px solid rgba(82, 183, 136, 0.45);
+  color: var(--green-pale);
+}
+
+.form-alert-error {
+  background: rgba(155, 89, 182, 0.16);
+  border: 1px solid rgba(155, 89, 182, 0.45);
+  color: var(--purple-pale);
+}
+
+.form-alert-light {
+  background: rgba(216, 243, 220, 0.65);
+  border: 1px solid rgba(82, 183, 136, 0.4);
+  color: var(--green-deep);
+}
+
+.form-alert-light.form-alert-error {
+  background: rgba(232, 213, 245, 0.55);
+  border-color: rgba(107, 63, 160, 0.35);
+  color: var(--purple-deep);
+}
+
+/* ── Скроллбар ─────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--white);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--green-bright);
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .admin-nav {
+    padding: 14px 20px;
+    flex-wrap: wrap;
+  }
+
+  .admin-nav-links {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .admin-nav-links a {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+}
